@@ -5,24 +5,16 @@
       "password": "123",
       "name": "Sultan Rosdalianti",
       "role": "user",
-      "balance": 100000,
-      "points": 52
-    }
-  ],
-  "drivers": [
+      "balance": 160000,
+      "points": 96
+    },
     {
-      "username": "driver01",
+      "username": "admin",
       "password": "123",
-      "name": "Bang Jago",
-      "role": "driver",
-      "balance": 500000,
-      "status": "ONLINE",
-      "income": 0,
-      "coords": {
-        "x": 50,
-        "y": 50
-      },
-      "rating": 5
+      "name": "Admin Panel",
+      "role": "admin",
+      "balance": 0,
+      "points": 0
     }
   ],
   "admins": [
@@ -31,6 +23,37 @@
       "password": "123",
       "name": "Master Dev",
       "role": "developer"
+    }
+  ],
+  "drivers": [
+    {
+      "username": "driver01",
+      "password": "123",
+      "name": "Bang Jago",
+      "role": "driver",
+      "balance": 805000,
+      "status": "ONLINE",
+      "income": 255000,
+      "coords": {
+        "x": 50.0003,
+        "y": 50.0003
+      },
+      "rating": 5,
+      "cashBalance": 255000
+    },
+    {
+      "username": "testdriver",
+      "password": "123",
+      "name": "Test Driver",
+      "role": "driver",
+      "balance": 20000,
+      "status": "ONLINE",
+      "income": 20000,
+      "coords": {
+        "x": 10,
+        "y": 10
+      },
+      "rating": 5
     }
   ],
   "orders": [
@@ -59,9 +82,545 @@
       "pointsEarned": 1,
       "time": "11:28:31 AM",
       "date": "12/26/2025"
+    },
+    {
+      "id": 1766780209138,
+      "customer": "Rosda",
+      "item": "dieMakan",
+      "price": 25000,
+      "status": "PENDING",
+      "pointsEarned": 2,
+      "time": "20.16.49",
+      "date": "26/12/2025"
+    },
+    {
+      "id": 1766780256877,
+      "item": "dieMAKAN: Nasi Goreng",
+      "price": 29428,
+      "customer": "Rosda",
+      "status": "PENDING",
+      "time": "20.17.36"
+    },
+    {
+      "id": 1766780334102,
+      "customer": "Rosda",
+      "item": "dieMakan",
+      "price": 25000,
+      "assignedDriver": "testdriver",
+      "status": "COMPLETED",
+      "pointsEarned": 2,
+      "time": "20.18.54",
+      "date": "26/12/2025",
+      "completedAt": "26/12/2025, 20.18.54"
+    },
+    {
+      "id": 1766780783398,
+      "customer": "Rosda",
+      "item": "dieMakan",
+      "price": 12000,
+      "originCoords": {
+        "x": 50,
+        "y": 50
+      },
+      "destinationCoords": {
+        "x": 50.0003,
+        "y": 50.0003
+      },
+      "assignedDriver": null,
+      "status": "PENDING",
+      "pointsEarned": 1,
+      "time": "20.26.23",
+      "date": "26/12/2025"
+    },
+    {
+      "id": 1766780822010,
+      "customer": "Rosda",
+      "item": "dieMakan",
+      "price": 12000,
+      "originCoords": {
+        "x": 50,
+        "y": 50
+      },
+      "destinationCoords": {
+        "x": 50.0003,
+        "y": 50.0003
+      },
+      "assignedDriver": null,
+      "status": "PENDING",
+      "pointsEarned": 1,
+      "time": "20.27.02",
+      "date": "26/12/2025"
+    },
+    {
+      "id": 1766781990824,
+      "customer": "Rosda",
+      "item": "Test Order",
+      "price": 25000,
+      "originCoords": {
+        "x": 50.0001,
+        "y": 50.0001
+      },
+      "destinationCoords": {
+        "x": 50.0003,
+        "y": 50.0003
+      },
+      "assignedDriver": "driver01",
+      "status": "COMPLETED",
+      "lifecycle": "COMPLETED",
+      "rejectedDrivers": [],
+      "pointsEarned": 2,
+      "time": "20.46.30",
+      "date": "26/12/2025",
+      "allocationTs": 1766781990826,
+      "allocatedAt": 1766782005824,
+      "completedAt": "26/12/2025, 20.47.18"
+    },
+    {
+      "id": 1766782054930,
+      "customer": "Rosda",
+      "item": "Test Order 2",
+      "price": 25000,
+      "originCoords": {
+        "x": 50.0001,
+        "y": 50.0001
+      },
+      "destinationCoords": {
+        "x": 50.0003,
+        "y": 50.0003
+      },
+      "assignedDriver": "driver01",
+      "status": "COMPLETED",
+      "lifecycle": "COMPLETED",
+      "rejectedDrivers": [],
+      "pointsEarned": 2,
+      "time": "20.47.34",
+      "date": "26/12/2025",
+      "allocationTs": 1766782054931,
+      "allocatedAt": 1766782055955,
+      "completedAt": "26/12/2025, 20.47.35"
+    },
+    {
+      "id": 1766782056013,
+      "customer": "Rosda",
+      "item": "Test Order 3",
+      "price": 25000,
+      "originCoords": {
+        "x": 50.0001,
+        "y": 50.0001
+      },
+      "destinationCoords": {
+        "x": 50.0003,
+        "y": 50.0003
+      },
+      "assignedDriver": "driver01",
+      "status": "COMPLETED",
+      "lifecycle": "COMPLETED",
+      "rejectedDrivers": [],
+      "pointsEarned": 2,
+      "time": "20.47.36",
+      "date": "26/12/2025",
+      "allocationTs": 1766782056014,
+      "allocatedAt": 1766782057028,
+      "completedAt": "26/12/2025, 20.47.37"
+    },
+    {
+      "id": 1766782057061,
+      "customer": "Rosda",
+      "item": "Test Order 4",
+      "price": 25000,
+      "originCoords": {
+        "x": 50.0001,
+        "y": 50.0001
+      },
+      "destinationCoords": {
+        "x": 50.0003,
+        "y": 50.0003
+      },
+      "assignedDriver": "driver01",
+      "status": "COMPLETED",
+      "lifecycle": "COMPLETED",
+      "rejectedDrivers": [],
+      "pointsEarned": 2,
+      "time": "20.47.37",
+      "date": "26/12/2025",
+      "allocationTs": 1766782057062,
+      "allocatedAt": 1766782058077,
+      "completedAt": "26/12/2025, 20.47.38"
+    },
+    {
+      "id": 1766782058114,
+      "customer": "Rosda",
+      "item": "Test Order 5",
+      "price": 25000,
+      "originCoords": {
+        "x": 50.0001,
+        "y": 50.0001
+      },
+      "destinationCoords": {
+        "x": 50.0003,
+        "y": 50.0003
+      },
+      "assignedDriver": "driver01",
+      "status": "COMPLETED",
+      "lifecycle": "COMPLETED",
+      "rejectedDrivers": [],
+      "pointsEarned": 2,
+      "time": "20.47.38",
+      "date": "26/12/2025",
+      "allocationTs": 1766782058114,
+      "allocatedAt": 1766782059131,
+      "completedAt": "26/12/2025, 20.47.39"
+    },
+    {
+      "id": 1766782059162,
+      "customer": "Rosda",
+      "item": "Test Order 6",
+      "price": 25000,
+      "originCoords": {
+        "x": 50.0001,
+        "y": 50.0001
+      },
+      "destinationCoords": {
+        "x": 50.0003,
+        "y": 50.0003
+      },
+      "assignedDriver": "driver01",
+      "status": "COMPLETED",
+      "lifecycle": "COMPLETED",
+      "rejectedDrivers": [],
+      "pointsEarned": 2,
+      "time": "20.47.39",
+      "date": "26/12/2025",
+      "allocationTs": 1766782059163,
+      "allocatedAt": 1766782060179,
+      "completedAt": "26/12/2025, 20.47.40"
+    },
+    {
+      "id": 1766782060215,
+      "customer": "Rosda",
+      "item": "Test Order 7",
+      "price": 25000,
+      "originCoords": {
+        "x": 50.0001,
+        "y": 50.0001
+      },
+      "destinationCoords": {
+        "x": 50.0003,
+        "y": 50.0003
+      },
+      "assignedDriver": "driver01",
+      "status": "COMPLETED",
+      "lifecycle": "COMPLETED",
+      "rejectedDrivers": [],
+      "pointsEarned": 2,
+      "time": "20.47.40",
+      "date": "26/12/2025",
+      "allocationTs": 1766782060216,
+      "allocatedAt": 1766782061233,
+      "completedAt": "26/12/2025, 20.47.41"
+    },
+    {
+      "id": 1766782061280,
+      "customer": "Rosda",
+      "item": "Test Order 8",
+      "price": 25000,
+      "originCoords": {
+        "x": 50.0001,
+        "y": 50.0001
+      },
+      "destinationCoords": {
+        "x": 50.0003,
+        "y": 50.0003
+      },
+      "assignedDriver": "driver01",
+      "status": "COMPLETED",
+      "lifecycle": "COMPLETED",
+      "rejectedDrivers": [],
+      "pointsEarned": 2,
+      "time": "20.47.41",
+      "date": "26/12/2025",
+      "allocationTs": 1766782061281,
+      "allocatedAt": 1766782062298,
+      "completedAt": "26/12/2025, 20.47.42"
+    },
+    {
+      "id": 1766782062331,
+      "customer": "Rosda",
+      "item": "Test Order 9",
+      "price": 25000,
+      "originCoords": {
+        "x": 50.0001,
+        "y": 50.0001
+      },
+      "destinationCoords": {
+        "x": 50.0003,
+        "y": 50.0003
+      },
+      "assignedDriver": "driver01",
+      "status": "COMPLETED",
+      "lifecycle": "COMPLETED",
+      "rejectedDrivers": [],
+      "pointsEarned": 2,
+      "time": "20.47.42",
+      "date": "26/12/2025",
+      "allocationTs": 1766782062333,
+      "allocatedAt": 1766782063347,
+      "completedAt": "26/12/2025, 20.47.43"
+    },
+    {
+      "id": 1766782063380,
+      "customer": "Rosda",
+      "item": "Test Order 10",
+      "price": 25000,
+      "originCoords": {
+        "x": 50.0001,
+        "y": 50.0001
+      },
+      "destinationCoords": {
+        "x": 50.0003,
+        "y": 50.0003
+      },
+      "assignedDriver": "driver01",
+      "status": "COMPLETED",
+      "lifecycle": "COMPLETED",
+      "rejectedDrivers": [],
+      "pointsEarned": 2,
+      "time": "20.47.43",
+      "date": "26/12/2025",
+      "allocationTs": 1766782063382,
+      "allocatedAt": 1766782064397,
+      "completedAt": "26/12/2025, 20.47.44"
+    },
+    {
+      "id": 1766782083732,
+      "customer": "Rosda",
+      "item": "Surge Test 1",
+      "price": 25000,
+      "originCoords": {
+        "x": 60.0001,
+        "y": 60.0001
+      },
+      "destinationCoords": {
+        "x": 60.0003,
+        "y": 60.0003
+      },
+      "assignedDriver": null,
+      "status": "PENDING",
+      "lifecycle": "PENDING",
+      "rejectedDrivers": [],
+      "pointsEarned": 2,
+      "time": "20.48.03",
+      "date": "26/12/2025"
+    },
+    {
+      "id": 1766782083741,
+      "customer": "Rosda",
+      "item": "Surge Test 2",
+      "price": 25000,
+      "originCoords": {
+        "x": 60.0001,
+        "y": 60.0001
+      },
+      "destinationCoords": {
+        "x": 60.0003,
+        "y": 60.0003
+      },
+      "assignedDriver": null,
+      "status": "PENDING",
+      "lifecycle": "PENDING",
+      "rejectedDrivers": [],
+      "pointsEarned": 2,
+      "time": "20.48.03",
+      "date": "26/12/2025"
+    },
+    {
+      "id": 1766782083748,
+      "customer": "Rosda",
+      "item": "Surge Test 3",
+      "price": 25000,
+      "originCoords": {
+        "x": 60.0001,
+        "y": 60.0001
+      },
+      "destinationCoords": {
+        "x": 60.0003,
+        "y": 60.0003
+      },
+      "assignedDriver": null,
+      "status": "PENDING",
+      "lifecycle": "PENDING",
+      "rejectedDrivers": [],
+      "pointsEarned": 2,
+      "time": "20.48.03",
+      "date": "26/12/2025"
+    },
+    {
+      "id": 1766782083755,
+      "customer": "Rosda",
+      "item": "Surge Test 4",
+      "price": 25000,
+      "originCoords": {
+        "x": 60.0001,
+        "y": 60.0001
+      },
+      "destinationCoords": {
+        "x": 60.0003,
+        "y": 60.0003
+      },
+      "assignedDriver": null,
+      "status": "PENDING",
+      "lifecycle": "PENDING",
+      "rejectedDrivers": [],
+      "pointsEarned": 2,
+      "time": "20.48.03",
+      "date": "26/12/2025"
+    },
+    {
+      "id": 1766782083762,
+      "customer": "Rosda",
+      "item": "Surge Test 5",
+      "price": 25000,
+      "originCoords": {
+        "x": 60.0001,
+        "y": 60.0001
+      },
+      "destinationCoords": {
+        "x": 60.0003,
+        "y": 60.0003
+      },
+      "assignedDriver": null,
+      "status": "PENDING",
+      "lifecycle": "PENDING",
+      "rejectedDrivers": [],
+      "pointsEarned": 2,
+      "time": "20.48.03",
+      "date": "26/12/2025"
+    },
+    {
+      "id": 1766782395886,
+      "customer": "Rosda",
+      "item": "Audit Test Order",
+      "price": 30000,
+      "originCoords": {
+        "x": 50.0001,
+        "y": 50.0001
+      },
+      "destinationCoords": {
+        "x": 50.0003,
+        "y": 50.0003
+      },
+      "assignedDriver": "driver01",
+      "status": "COMPLETED",
+      "lifecycle": "COMPLETED",
+      "rejectedDrivers": [],
+      "pointsEarned": 3,
+      "time": "20.53.15",
+      "date": "26/12/2025",
+      "allocationTs": 1766782395901,
+      "allocatedAt": 1766782396959,
+      "completedAt": "26/12/2025, 20.53.17"
+    },
+    {
+      "id": 1766782730079,
+      "item": "TOPUP: BANK",
+      "price": 50000,
+      "paymentMethod": "BANK",
+      "destination": "Sultan Hub",
+      "status": "COMPLETED",
+      "time": "20.58.50",
+      "date": "26 Desember 2025"
+    },
+    {
+      "id": 1766782935974,
+      "item": "TOPUP: BANK",
+      "price": 10000,
+      "paymentMethod": "BANK",
+      "destination": "Sultan Hub",
+      "status": "COMPLETED",
+      "time": "21.02.15",
+      "date": "26 Desember 2025"
+    },
+    {
+      "id": 1766783324626,
+      "customer": "Rosda",
+      "item": "Lock Test",
+      "price": 20000,
+      "originCoords": {
+        "x": 50.0001,
+        "y": 50.0001
+      },
+      "destinationCoords": {
+        "x": 50.0003,
+        "y": 50.0003
+      },
+      "assignedDriver": "driver01",
+      "status": "COMPLETED",
+      "lifecycle": "COMPLETED",
+      "rejectedDrivers": [],
+      "pointsEarned": 2,
+      "time": "21.08.44",
+      "date": "26/12/2025",
+      "allocationTs": 1766783324645,
+      "lockedBy": "driver01",
+      "lockTs": 1766783324735,
+      "allocatedAt": 1766783324783,
+      "completedAt": "26/12/2025, 21.08.44"
+    },
+    {
+      "id": 1766783339752,
+      "customer": "Rosda",
+      "item": "Lock Test",
+      "price": 20000,
+      "originCoords": {
+        "x": 50.0001,
+        "y": 50.0001
+      },
+      "destinationCoords": {
+        "x": 50.0003,
+        "y": 50.0003
+      },
+      "assignedDriver": "driver01",
+      "status": "COMPLETED",
+      "lifecycle": "COMPLETED",
+      "rejectedDrivers": [],
+      "pointsEarned": 2,
+      "time": "21.08.59",
+      "date": "26/12/2025",
+      "allocationTs": 1766783339753,
+      "lockedBy": "driver01",
+      "lockTs": 1766783339762,
+      "allocatedAt": 1766783339774,
+      "completedAt": "26/12/2025, 21.08.59"
+    },
+    {
+      "id": 1766783831191,
+      "item": "dieMOTOR [Standard]",
+      "price": 15000,
+      "origin": "Pulau burung",
+      "destination": "Sambu Group Indragiri (Kantor)",
+      "paymentMethod": "M-Banking Indonesia",
+      "employeeInfo": null,
+      "assignedDriver": null,
+      "status": "PENDING",
+      "lifecycle": "PENDING",
+      "rejectedDrivers": [],
+      "originCoords": null,
+      "destinationCoords": null,
+      "pointsEarned": 1,
+      "time": "21.17.11",
+      "date": "26/12/2025"
     }
   ],
-  "chats": [],
+  "chats": [
+    {
+      "id": 1766781279169,
+      "orderId": 1766780783398,
+      "from": "driver01",
+      "to": null,
+      "message": "Sesuai titik ya, Sultan!",
+      "time": "20.34.39"
+    }
+  ],
   "vouchers": [
     {
       "code": "SULTAN313",
@@ -74,9 +633,213 @@
       "minOrder": 15000
     }
   ],
-  "reports": [],
+  "reports": [
+    {
+      "id": 1766781068141,
+      "type": "SOS",
+      "driver": "driver01",
+      "coords": {
+        "x": 50,
+        "y": 50
+      },
+      "message": "Test SOS",
+      "time": "26/12/2025, 20.31.08"
+    },
+    {
+      "id": 1766783749958,
+      "type": "SOS",
+      "driver": "driver01",
+      "coords": {
+        "x": 50,
+        "y": 50
+      },
+      "message": "Butuh bantuan",
+      "time": "26/12/2025, 21.15.49"
+    }
+  ],
   "system": {
     "downloads": 1540,
-    "total_revenue": 0
-  }
+    "total_revenue": 275000
+  },
+  "reviews": [
+    {
+      "id": 1766781279204,
+      "from": "Rosda",
+      "to": "driver01",
+      "rating": 5,
+      "comment": "Good service",
+      "type": "driver",
+      "time": "26/12/2025, 20.34.39"
+    }
+  ],
+  "logs": [
+    {
+      "id": 1766782935920,
+      "timestamp": "26/12/2025, 21.02.15",
+      "type": "TOPUP",
+      "username": "Rosda",
+      "amount": 10000,
+      "description": "Top-up via BANK",
+      "previousBalance": 150000,
+      "newBalance": 160000,
+      "balanceChange": 10000,
+      "ipAddress": "127.0.0.1"
+    },
+    {
+      "id": 1766783324735,
+      "timestamp": "26/12/2025, 21.08.44",
+      "type": "LOCK",
+      "username": "driver01",
+      "amount": 0,
+      "description": "Locked order 1766783324626",
+      "previousBalance": null,
+      "newBalance": null,
+      "balanceChange": 0,
+      "ipAddress": "127.0.0.1"
+    },
+    {
+      "id": 1766783324877,
+      "timestamp": "26/12/2025, 21.08.44",
+      "type": "EARNINGS",
+      "username": "driver01",
+      "amount": 15000,
+      "description": "Order #1766783324626 completed",
+      "previousBalance": 775000,
+      "newBalance": 790000,
+      "balanceChange": 15000,
+      "ipAddress": "127.0.0.1"
+    },
+    {
+      "id": 1766783339762,
+      "timestamp": "26/12/2025, 21.08.59",
+      "type": "LOCK",
+      "username": "driver01",
+      "amount": 0,
+      "description": "Locked order 1766783339752",
+      "previousBalance": null,
+      "newBalance": null,
+      "balanceChange": 0,
+      "ipAddress": "127.0.0.1"
+    },
+    {
+      "id": 1766783339796,
+      "timestamp": "26/12/2025, 21.08.59",
+      "type": "EARNINGS",
+      "username": "driver01",
+      "amount": 15000,
+      "description": "Order #1766783339752 completed",
+      "previousBalance": 790000,
+      "newBalance": 805000,
+      "balanceChange": 15000,
+      "ipAddress": "127.0.0.1"
+    },
+    {
+      "id": 1766783749962,
+      "timestamp": "26/12/2025, 21.15.49",
+      "type": "SOS",
+      "username": "driver01",
+      "amount": 0,
+      "description": "SOS reported: Butuh bantuan",
+      "previousBalance": null,
+      "newBalance": null,
+      "balanceChange": 0,
+      "ipAddress": "127.0.0.1"
+    },
+    {
+      "id": 1766783977260,
+      "timestamp": "26/12/2025, 21.19.37",
+      "type": "POINTS_AWARDED",
+      "username": "Rosda",
+      "amount": 50,
+      "description": "Order completed",
+      "previousBalance": 96,
+      "newBalance": 146,
+      "balanceChange": 50,
+      "ipAddress": "127.0.0.1"
+    },
+    {
+      "id": 1766783986283,
+      "timestamp": "26/12/2025, 21.19.46",
+      "type": "PAYROLL_DEDUCTION",
+      "username": "driver01",
+      "amount": 25000,
+      "description": "Sambu payroll deduction for Ahmad Rifki",
+      "previousBalance": null,
+      "newBalance": null,
+      "balanceChange": 0,
+      "ipAddress": "127.0.0.1"
+    },
+    {
+      "id": 1766784612578,
+      "timestamp": "2025-12-26T21:30:12.578Z",
+      "type": "UNAUTHORIZED_ACCESS_ATTEMPT",
+      "username": "dev",
+      "amount": 0,
+      "description": "Attempted admin access without proper role",
+      "balanceChange": 0
+    },
+    {
+      "id": 1766784660021,
+      "timestamp": "2025-12-26T21:31:00.021Z",
+      "type": "ADMIN_ACCESS",
+      "username": "admin",
+      "amount": 0,
+      "description": "DASHBOARD",
+      "balanceChange": 0
+    },
+    {
+      "id": 1766784660048,
+      "timestamp": "2025-12-26T21:31:00.048Z",
+      "type": "UNAUTHORIZED_ACCESS_ATTEMPT",
+      "username": "dev",
+      "amount": 0,
+      "description": "Attempted admin access without proper role",
+      "balanceChange": 0
+    },
+    {
+      "id": 1766785234328,
+      "timestamp": "2025-12-26T21:40:34.328Z",
+      "type": "ADMIN_ACCESS",
+      "username": "admin",
+      "amount": 0,
+      "description": "DASHBOARD",
+      "balanceChange": 0
+    },
+    {
+      "id": 1766785234360,
+      "timestamp": "2025-12-26T21:40:34.360Z",
+      "type": "ADMIN_ACCESS",
+      "username": "dev",
+      "amount": 0,
+      "description": "DASHBOARD",
+      "balanceChange": 0
+    },
+    {
+      "id": 1766785234369,
+      "timestamp": "2025-12-26T21:40:34.369Z",
+      "type": "UNAUTHORIZED_ACCESS_ATTEMPT",
+      "username": "Rosda",
+      "amount": 0,
+      "description": "Attempted admin access without proper role",
+      "balanceChange": 0
+    },
+    {
+      "id": 1766785307404,
+      "timestamp": "2025-12-26T21:41:47.404Z",
+      "type": "UNAUTHORIZED_ACCESS_ATTEMPT",
+      "username": "Rosda",
+      "amount": 0,
+      "description": "Attempted admin access without proper role",
+      "balanceChange": 0
+    },
+    {
+      "id": 1766785307424,
+      "timestamp": "2025-12-26T21:41:47.424Z",
+      "type": "POINTS_REDEEMED",
+      "username": "Rosda",
+      "amount": 50,
+      "description": "Redeemed for Rp 0 discount",
+      "balanceChange": -50
+    }
+  ]
 }

@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>dieHantar Admin Dashboard - Sultan Control Center</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        .metric-card { 
+            @apply bg-white rounded-lg shadow-md p-6 border-l-4;
+        }
+        .metric-primary { @apply border-blue-500; }
+        .metric-success { @apply border-green-500; }
+        .metric-warning { @apply border-yellow-500; }
+        .metric-danger { @apply border-red-500; }
+        
+        .metric-value {
+            @apply text-3xl font-bold mt-2;
+        }
+        .metric-label {
+            @apply text-sm text-gray-600 uppercase tracking-wider;
+        }
+        
+        .chart-container {
+            @apply bg-white rounded-lg shadow-md p-6 mb-6;
+            position: relative;
+            height: 300px;
+        }
+        
+        .table-row { @apply border-b hover:bg-gray-50 transition; }
+        .badge {
+            @apply px-3 py-1 rounded-full text-xs font-semibold;
+        }
+        .badge-online { @apply bg-green-100 text-green-800; }
+        .badge-offline { @apply bg-gray-100 text-gray-800; }
+        .badge-busy { @apply bg-yellow-100 text-yellow-800; }
+        
+        .loading { 
+            @apply opacity-50 pointer-events-none;
+        }
+    </style>
+</head>
+<body class="bg-gray-100">
+    <div class="min-h-screen">
+        <!-- Navigation -->
+        <nav class="bg-blue-600 text-white shadow-lg">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
+                <div class="flex items-center">
+                    <h1 class="text-2xl font-bold">🚗 dieHantar Sultan Control Center</h1>
+                </div>
+                <div class="flex items-center gap-4">
+                    <span id="currentUser" class="text-sm">Loading...</span>
+                    <button onclick="logout()" class="bg-red-500 hover:bg-red-700 px-4 py-2 rounded">Logout</button>
+                </div>
+            </div>
+        </nav>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+            <!-- Login Section (Hidden after login) -->
+            <div id="loginSection" class="mb-8 bg-white rounded-lg shadow-md p-8">
+                <h2 class="text-xl font-bold mb-6">Admin Login</h2>
+                <div class="flex gap-4">
+                    <input type="text" id="adminUsername" placeholder="Username" class="flex-1 px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    <input type="password" id="adminPassword" placeholder="Password" class="flex-1 px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    <button onclick="adminLogin()" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg font-semibold">Login</button>
+                </div>
+                <p class="text-sm text-gray-600 mt-4">💡 Demo: Use admin/123 or dev/123 (must have 'admin' or 'dev' role in database)</p>
+            </div>
+
+            <!-- Dashboard Content (Hidden before login) -->
+            <div id="dashboardContent" class="hidden">
+                <!-- Key Metrics -->
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+                    <div class="metric-card metric-primary">
+                        <div class="metric-label">Total Orders</div>
+                        <div class="metric-value text-blue-600" id="totalOrders">-</div>
+                        <div class="text-xs text-gray-500 mt-2" id="ordersChange">-</div>
+                    </div>
+                    <div class="metric-card metric-success">
+                        <div class="metric-label">Completed Orders</div>
+                        <div class="metric-value text-green-600" id="completedOrders">-</div>
+                        <div class="text-xs text-gray-500 mt-2" id="completionRate">-</div>
+                    </div>
+                    <div class="metric-card metric-warning">
+                        <div class="metric-label">Total Revenue</div>
+                        <div class="metric-value text-yellow-600" id="totalRevenue">-</div>
+                        <div class="text-xs text-gray-500 mt-2" id="revenueChange">-</div>
+                    </div>
+                    <div class="metric-card metric-danger">
+                        <div class="metric-label">Active Drivers</div>
+                        <div class="metric-value text-red-600" id="activeDrivers">-</div>
+                        <div class="text-xs text-gray-500 mt-2" id="avgRating">⭐ -</div>
+                    </div>
+                </div>
+
+                <!-- Charts Row -->
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
+                    <div class="chart-container">
+                        <canvas id="revenueChart"></canvas>
+                    </div>
+                    <div class="chart-container">
+                        <canvas id="ordersChart"></canvas>
+                    </div>
+                </div>
+
+                <!-- Tabs for Reports -->
+                <div class="bg-white rounded-lg shadow-md overflow-hidden">
+                    <div class="border-b flex">
+                        <button onclick="switchTab('daily')" class="tab-button active flex-1 py-4 px-6 text-center font-semibold border-b-2 border-blue-600">📊 Daily Report</button>
+                        <button onclick="switchTab('drivers')" class="tab-button flex-1 py-4 px-6 text-center font-semibold border-b-2 border-transparent hover:border-gray-300">👥 Driver Stats</button>
+                        <button onclick="switchTab('audit')" class="tab-button flex-1 py-4 px-6 text-center font-semibold border-b-2 border-transparent hover:border-gray-300">🔐 Audit Logs</button>
+                    </div>
+
+                    <!-- Daily Report Tab -->
+                    <div id="dailyTab" class="tab-content p-6">
+                        <h3 class="text-lg font-bold mb-4" id="dailyDate">Daily Report</h3>
+                        <div class="grid grid-cols-3 gap-4 mb-6">
+                            <div class="bg-blue-50 p-4 rounded-lg">
+                                <div class="text-sm text-gray-600">Orders Today</div>
+                                <div class="text-2xl font-bold text-blue-600" id="ordersToday">-</div>
+                            </div>
+                            <div class="bg-green-50 p-4 rounded-lg">
+                                <div class="text-sm text-gray-600">Revenue Today</div>
+                                <div class="text-2xl font-bold text-green-600" id="revenueToday">-</div>
+                            </div>
+                            <div class="bg-purple-50 p-4 rounded-lg">
+                                <div class="text-sm text-gray-600">Avg Order Value</div>
+                                <div class="text-2xl font-bold text-purple-600" id="avgOrderValue">-</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Driver Stats Tab -->
+                    <div id="driversTab" class="tab-content p-6 hidden">
+                        <h3 class="text-lg font-bold mb-4">Driver Performance</h3>
+                        <div class="overflow-x-auto">
+                            <table class="w-full">
+                                <thead class="bg-gray-100">
+                                    <tr>
+                                        <th class="text-left py-3 px-4 font-semibold">Driver</th>
+                                        <th class="text-left py-3 px-4 font-semibold">Status</th>
+                                        <th class="text-right py-3 px-4 font-semibold">Orders</th>
+                                        <th class="text-right py-3 px-4 font-semibold">Income</th>
+                                        <th class="text-right py-3 px-4 font-semibold">Rating</th>
+                                        <th class="text-right py-3 px-4 font-semibold">Balance</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="driversTableBody">
+                                    <tr class="table-row">
+                                        <td colspan="6" class="text-center py-4 text-gray-500">Loading drivers...</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <!-- Audit Logs Tab -->
+                    <div id="auditTab" class="tab-content p-6 hidden">
+                        <h3 class="text-lg font-bold mb-4">Recent Audit Trail</h3>
+                        <div class="space-y-2 max-h-96 overflow-y-auto">
+                            <div id="auditLogsContainer">
+                                <div class="text-center py-4 text-gray-500">Loading audit logs...</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let currentAdmin = null;
+        let dashboardCharts = {};
+
+        // Tab Switching
+        function switchTab(tabName) {
+            document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
+            document.querySelectorAll('.tab-button').forEach(el => {
+                el.classList.remove('border-blue-600');
+                el.classList.add('border-transparent');
+            });
+            
+            document.getElementById(tabName + 'Tab').classList.remove('hidden');
+            event.target.classList.remove('border-transparent');
+            event.target.classList.add('border-blue-600');
+
+            // Load data for tab
+            if (tabName === 'drivers') loadDriverStats();
+            if (tabName === 'audit') loadAuditLogs();
+        }
+
+        // Admin Login
+        async function adminLogin() {
+            const username = document.getElementById('adminUsername').value;
+            const password = document.getElementById('adminPassword').value;
+            
+            if (!username || !password) {
+                alert('Please enter username and password');
+                return;
+            }
+
+            try {
+                // First, try to login
+                const loginRes = await fetch('http://localhost:3000/api/login', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ username, password, deviceId: 'admin-web-' + Date.now() })
+                });
+                
+                const loginData = await loginRes.json();
+                if (!loginData.success) {
+                    alert('Login failed: ' + loginData.msg);
+                    return;
+                }
+
+                // Check if admin/dev role
+                if (!['admin', 'dev'].includes(loginData.role)) {
+                    alert('Access denied: Admin or Dev role required');
+                    return;
+                }
+
+                currentAdmin = { username, password, role: loginData.role };
+                localStorage.setItem('adminSession', JSON.stringify(currentAdmin));
+                
+                document.getElementById('loginSection').classList.add('hidden');
+                document.getElementById('dashboardContent').classList.remove('hidden');
+                document.getElementById('currentUser').textContent = `👤 ${username} (${loginData.role})`;
+
+                loadDashboard();
+            } catch (err) {
+                console.error('Login error:', err);
+                alert('Connection error: ' + err.message);
+            }
+        }
+
+        // Logout
+        function logout() {
+            currentAdmin = null;
+            localStorage.removeItem('adminSession');
+            document.getElementById('loginSection').classList.remove('hidden');
+            document.getElementById('dashboardContent').classList.add('hidden');
+            document.getElementById('adminUsername').value = '';
+            document.getElementById('adminPassword').value = '';
+        }
+
+        // Load Dashboard
+        async function loadDashboard() {
+            if (!currentAdmin) return;
+
+            try {
+                const res = await fetch('http://localhost:3000/api/admin/dashboard?username=' + currentAdmin.username);
+                const data = await res.json();
+                
+                if (!data.success) {
+                    if (data.msg.includes('Unauthorized') || data.msg.includes('Forbidden')) {
+                        logout();
+                        alert('Session expired or access denied');
+                    }
+                    return;
+                }
+
+                const d = data.dashboard;
+                const completed = d.completedOrders || 0;
+                const total = d.totalOrders || 0;
+                const completionRate = total > 0 ? ((completed / total) * 100).toFixed(1) : 0;
+
+                // Update metrics
+                document.getElementById('totalOrders').textContent = total;
+                document.getElementById('completedOrders').textContent = completed;
+                document.getElementById('completionRate').textContent = `${completionRate}% completion`;
+                document.getElementById('totalRevenue').textContent = 'Rp ' + (d.totalRevenue || 0).toLocaleString('id-ID');
+                document.getElementById('activeDrivers').textContent = d.onlineDrivers + ' / ' + d.totalDrivers;
+                document.getElementById('avgRating').textContent = '⭐ ' + (d.avgDriverRating || 5) + '/5.0';
+
+                // Load daily report
+                loadDailyReport();
+
+                // Update charts
+                updateCharts();
+            } catch (err) {
+                console.error('Dashboard load error:', err);
+            }
+        }
+
+        // Load Daily Report
+        async function loadDailyReport() {
+            if (!currentAdmin) return;
+
+            try {
+                const res = await fetch('http://localhost:3000/api/admin/reports/daily?username=' + currentAdmin.username);
+                const data = await res.json();
+                
+                if (!data.success) return;
+
+                const r = data.report;
+                document.getElementById('dailyDate').textContent = 'Daily Report - ' + r.date;
+                document.getElementById('ordersToday').textContent = r.ordersCompleted || 0;
+                document.getElementById('revenueToday').textContent = 'Rp ' + (r.revenueToday || 0).toLocaleString('id-ID');
+                document.getElementById('avgOrderValue').textContent = 'Rp ' + (r.avgOrderValue || 0).toLocaleString('id-ID');
+            } catch (err) {
+                console.error('Daily report error:', err);
+            }
+        }
+
+        // Load Driver Stats
+        async function loadDriverStats() {
+            if (!currentAdmin) return;
+
+            try {
+                const res = await fetch('http://localhost:3000/api/admin/reports/drivers?username=' + currentAdmin.username);
+                const data = await res.json();
+                
+                if (!data.success) return;
+
+                const tbody = document.getElementById('driversTableBody');
+                tbody.innerHTML = '';
+
+                (data.drivers || []).forEach(d => {
+                    const row = document.createElement('tr');
+                    row.className = 'table-row';
+                    row.innerHTML = `
+                        <td class="py-3 px-4">${d.name || d.username}</td>
+                        <td class="py-3 px-4">
+                            <span class="badge ${d.status === 'ONLINE' ? 'badge-online' : 'badge-offline'}">
+                                ${d.status === 'ONLINE' ? '🟢 Online' : '🔴 Offline'}
+                            </span>
+                        </td>
+                        <td class="text-right py-3 px-4 font-semibold">${d.totalOrders}</td>
+                        <td class="text-right py-3 px-4 text-green-600 font-semibold">Rp ${d.totalIncome.toLocaleString('id-ID')}</td>
+                        <td class="text-right py-3 px-4">⭐ ${d.rating}/5.0</td>
+                        <td class="text-right py-3 px-4 font-semibold">Rp ${d.balance.toLocaleString('id-ID')}</td>
+                    `;
+                    tbody.appendChild(row);
+                });
+
+                if (data.drivers.length === 0) {
+                    tbody.innerHTML = '<tr class="table-row"><td colspan="6" class="text-center py-4 text-gray-500">No drivers found</td></tr>';
+                }
+            } catch (err) {
+                console.error('Driver stats error:', err);
+            }
+        }
+
+        // Load Audit Logs
+        async function loadAuditLogs() {
+            if (!currentAdmin) return;
+
+            try {
+                const res = await fetch('http://localhost:3000/api/admin/audit-logs?username=' + currentAdmin.username);
+                const data = await res.json();
+                
+                if (!data.success) return;
+
+                const container = document.getElementById('auditLogsContainer');
+                container.innerHTML = '';
+
+                const logs = (data.logs || []).reverse().slice(0, 50);
+                logs.forEach(log => {
+                    const badge = document.createElement('div');
+                    badge.className = 'bg-gray-50 p-3 rounded border-l-4 border-gray-400';
+                    
+                    let typeColor = 'border-gray-400';
+                    if (log.type === 'EARNINGS') typeColor = 'border-green-400';
+                    if (log.type === 'TOPUP') typeColor = 'border-blue-400';
+                    if (log.type === 'OTP_VERIFIED') typeColor = 'border-yellow-400';
+                    if (log.type === 'SOS') typeColor = 'border-red-400';
+                    if (log.type === 'ADMIN_ACCESS') typeColor = 'border-purple-400';
+                    
+                    badge.className = `bg-gray-50 p-3 rounded border-l-4 ${typeColor}`;
+                    badge.innerHTML = `
+                        <div class="flex justify-between items-start">
+                            <div>
+                                <div class="font-semibold text-sm">${log.type}</div>
+                                <div class="text-xs text-gray-600">${log.username} • ${new Date(log.timestamp).toLocaleString('id-ID')}</div>
+                            </div>
+                            <div class="text-right">
+                                ${log.amount ? `<div class="font-bold text-sm">Rp ${log.amount.toLocaleString('id-ID')}</div>` : ''}
+                                ${log.description ? `<div class="text-xs text-gray-600">${log.description}</div>` : ''}
+                            </div>
+                        </div>
+                    `;
+                    container.appendChild(badge);
+                });
+
+                if (logs.length === 0) {
+                    container.innerHTML = '<div class="text-center py-4 text-gray-500">No audit logs found</div>';
+                }
+            } catch (err) {
+                console.error('Audit logs error:', err);
+            }
+        }
+
+        // Update Charts
+        async function updateCharts() {
+            const ctx1 = document.getElementById('revenueChart');
+            const ctx2 = document.getElementById('ordersChart');
+
+            // Sample data (in production, fetch from /api/admin/analytics)
+            const revenueCtx = ctx1.getContext('2d');
+            if (dashboardCharts.revenue) dashboardCharts.revenue.destroy();
+            dashboardCharts.revenue = new Chart(revenueCtx, {
+                type: 'line',
+                data: {
+                    labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+                    datasets: [{
+                        label: 'Daily Revenue (Rp)',
+                        data: [50000, 75000, 60000, 90000, 120000, 110000, 85000],
+                        borderColor: '#3b82f6',
+                        backgroundColor: 'rgba(59, 130, 246, 0.1)',
+                        tension: 0.4,
+                        fill: true
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: { legend: { display: true } }
+                }
+            });
+
+            const ordersCtx = ctx2.getContext('2d');
+            if (dashboardCharts.orders) dashboardCharts.orders.destroy();
+            dashboardCharts.orders = new Chart(ordersCtx, {
+                type: 'bar',
+                data: {
+                    labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+                    datasets: [{
+                        label: 'Orders Completed',
+                        data: [8, 12, 10, 15, 18, 17, 13],
+                        backgroundColor: '#10b981'
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: { legend: { display: true } }
+                }
+            });
+        }
+
+        // Check for existing session on load
+        window.addEventListener('load', () => {
+            const session = localStorage.getItem('adminSession');
+            if (session) {
+                currentAdmin = JSON.parse(session);
+                document.getElementById('loginSection').classList.add('hidden');
+                document.getElementById('dashboardContent').classList.remove('hidden');
+                document.getElementById('currentUser').textContent = `👤 ${currentAdmin.username} (${currentAdmin.role})`;
+                loadDashboard();
+            }
+        });
+
+        // Auto-refresh dashboard every 30 seconds
+        setInterval(() => {
+            if (currentAdmin && !document.getElementById('dashboardContent').classList.contains('hidden')) {
+                loadDashboard();
+            }
+        }, 30000);
+    </script>
+</body>
+</html>
