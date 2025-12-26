@@ -1,312 +1,82 @@
 {
-  "user": {
-    "name": "Rama Kirana",
-    "balance": 10000,
-    "points": 5050
-  },
-  "driver": {
-    "id": "772",
-    "name": "Bang Jago",
-    "balance": 850000,
-    "status": "ONLINE"
-  },
+  "users": [
+    {
+      "username": "Rosda",
+      "password": "123",
+      "name": "Sultan Rosdalianti",
+      "role": "user",
+      "balance": 100000,
+      "points": 52
+    }
+  ],
+  "drivers": [
+    {
+      "username": "driver01",
+      "password": "123",
+      "name": "Bang Jago",
+      "role": "driver",
+      "balance": 500000,
+      "status": "ONLINE",
+      "income": 0,
+      "coords": {
+        "x": 50,
+        "y": 50
+      },
+      "rating": 5
+    }
+  ],
+  "admins": [
+    {
+      "username": "dev",
+      "password": "123",
+      "name": "Master Dev",
+      "role": "developer"
+    }
+  ],
   "orders": [
     {
-      "id": 1766582135673,
+      "id": 1766748498450,
       "item": "dieMOTOR [Standard]",
-      "price": 15000,
-      "status": "COMPLETED",
-      "time": "01:15 PM"
-    },
-    {
-      "id": 1766582300018,
-      "item": "dieMOBIL [Standard]",
-      "price": 15000,
-      "status": "COMPLETED",
-      "time": "01:18 PM"
-    },
-    {
-      "id": 1766582492436,
-      "item": "dieMOTOR [Standard]",
-      "price": 15000,
-      "status": "COMPLETED",
-      "time": "01:21 PM"
-    },
-    {
-      "id": 1766582496434,
-      "item": "dieMOTOR [Standard]",
-      "price": 15000,
-      "status": "COMPLETED",
-      "time": "01:21 PM"
-    },
-    {
-      "id": 1766582510795,
-      "item": "dieMOTOR [Sultan Class]",
-      "price": 25000,
-      "status": "PENDING",
-      "time": "01:21 PM"
-    },
-    {
-      "id": 1766582515657,
-      "item": "dieMOBIL [Sultan Class]",
-      "price": 25000,
-      "status": "PENDING",
-      "time": "01:21 PM"
-    },
-    {
-      "id": 1766582518401,
-      "item": "dieRODA-TIGA [Standard]",
-      "price": 15000,
-      "status": "PENDING",
-      "time": "01:21 PM"
-    },
-    {
-      "id": 1766583476697,
-      "item": "dieMOTOR [Standard]",
-      "price": 15000,
-      "status": "PENDING",
-      "time": "01:37 PM"
-    },
-    {
-      "id": 1766651082784,
-      "item": "dieMOTOR [Standard]",
-      "price": 15000,
-      "status": "PENDING",
-      "time": "08:24 AM"
-    },
-    {
-      "id": 1766651085032,
-      "item": "dieMOTOR [Standard]",
-      "price": 15000,
-      "status": "PENDING",
-      "time": "08:24 AM"
-    },
-    {
-      "id": 1766652765941,
-      "item": "dieMOTOR [Standard]",
-      "price": 15000,
-      "status": "PENDING",
-      "time": "08:52 AM"
-    },
-    {
-      "id": 1766652935998,
-      "item": "dieMOTOR [Standard]",
-      "price": 15000,
-      "status": "PENDING",
-      "time": "08:55 AM"
-    },
-    {
-      "id": 1766652937667,
-      "item": "dieMOBIL [Standard]",
-      "price": 15000,
-      "status": "PENDING",
-      "time": "08:55 AM"
-    },
-    {
-      "id": 1766652939288,
-      "item": "dieRODA-TIGA [Standard]",
-      "price": 15000,
-      "status": "PENDING",
-      "time": "08:55 AM"
-    },
-    {
-      "id": 1766653209473,
-      "item": "dieMOTOR [Standard]",
-      "price": 15000,
-      "status": "PENDING",
-      "time": "09:00 AM"
-    },
-    {
-      "id": 1766653211967,
-      "item": "dieMOTOR [Standard]",
-      "price": 15000,
-      "status": "PENDING",
-      "time": "09:00 AM"
-    },
-    {
-      "id": 1766653213388,
-      "item": "dieMOTOR [Standard]",
-      "price": 15000,
-      "status": "PENDING",
-      "time": "09:00 AM"
-    },
-    {
-      "id": 1766653214707,
-      "item": "dieMOTOR [Standard]",
-      "price": 15000,
-      "status": "PENDING",
-      "time": "09:00 AM"
-    },
-    {
-      "id": 1766653271923,
-      "item": "dieMOTOR [Standard]",
-      "price": 15000,
-      "status": "PENDING",
-      "time": "09:01 AM"
-    },
-    {
-      "id": 1766653273619,
-      "item": "dieMOTOR [Standard]",
-      "price": 15000,
-      "status": "PENDING",
-      "time": "09:01 AM"
-    },
-    {
-      "id": 1766653275097,
-      "item": "dieMOTOR [Standard]",
-      "price": 15000,
-      "status": "PENDING",
-      "time": "09:01 AM"
-    },
-    {
-      "id": 1766653276103,
-      "item": "dieMOTOR [Standard]",
-      "price": 15000,
-      "status": "PENDING",
-      "time": "09:01 AM"
-    },
-    {
-      "id": 1766653276823,
-      "item": "dieMOTOR [Sultan]",
-      "price": 25000,
-      "status": "PENDING",
-      "time": "09:01 AM"
-    },
-    {
-      "id": 1766653277856,
-      "item": "dieMOTOR [Sultan]",
-      "price": 25000,
-      "status": "PENDING",
-      "time": "09:01 AM"
-    },
-    {
-      "id": 1766653278617,
-      "item": "dieMOBIL [Standard]",
-      "price": 15000,
-      "status": "PENDING",
-      "time": "09:01 AM"
-    },
-    {
-      "id": 1766653346725,
-      "item": "dieKIRIM [Sultan]",
-      "price": 25000,
-      "status": "PENDING",
-      "time": "09:02 AM"
-    },
-    {
-      "id": 1766653347827,
-      "item": "dieKIRIM [Sultan]",
-      "price": 25000,
-      "status": "PENDING",
-      "time": "09:02 AM"
-    },
-    {
-      "id": 1766653349016,
-      "item": "dieKIRIM [Sultan]",
-      "price": 25000,
-      "status": "PENDING",
-      "time": "09:02 AM"
-    },
-    {
-      "id": 1766653349850,
-      "item": "dieBELANJA [Sultan]",
-      "price": 25000,
-      "status": "PENDING",
-      "time": "09:02 AM"
-    },
-    {
-      "id": 1766653350886,
-      "item": "dieWASH [Sultan]",
-      "price": 25000,
-      "status": "PENDING",
-      "time": "09:02 AM"
-    },
-    {
-      "id": 1766653649663,
-      "item": "dieMOTOR [Standard]",
-      "price": 15000,
-      "status": "PENDING",
-      "time": "09:07 AM"
-    },
-    {
-      "id": 1766653650879,
-      "item": "dieMOTOR [Standard]",
-      "price": 15000,
-      "status": "PENDING",
-      "time": "09:07 AM"
-    },
-    {
-      "id": 1766653678290,
-      "item": "dieMOTOR [Standard]",
-      "price": 15000,
-      "status": "PENDING",
-      "time": "09:07 AM"
-    },
-    {
-      "id": 1766655654659,
-      "item": "dieMOTOR [Standard]",
-      "price": 15000,
-      "origin": "N/A",
-      "destination": "Alamat Default Sultan",
-      "payment": "dieHantar Pay",
-      "status": "PENDING",
-      "time": "09:40 AM"
-    },
-    {
-      "id": 1766655661156,
-      "item": "dieMOBIL [Standard]",
-      "price": 15000,
-      "origin": "N/A",
-      "destination": "Alamat Default Sultan",
-      "payment": "dieHantar Pay",
-      "status": "PENDING",
-      "time": "09:41 AM"
-    },
-    {
-      "id": 1766655662598,
-      "item": "dieMOTOR [Standard]",
-      "price": 15000,
-      "origin": "N/A",
-      "destination": "Alamat Default Sultan",
-      "payment": "dieHantar Pay",
-      "status": "PENDING",
-      "time": "09:41 AM"
-    },
-    {
-      "id": 1766662382821,
-      "item": "dieMOBIL [Standard]",
       "price": 15000,
       "origin": "pulau burung ",
       "destination": "Guntung",
-      "paymentMethod": "Bayar diePotongGajian",
-      "employeeInfo": {
-        "name": "Rama Kirana ",
-        "nik": "Pra01697",
-        "fix": "52530",
-        "pt": "PT. RIAU SAKTI UNITED PLANTATIONS"
-      },
+      "paymentMethod": "E-Wallet Sultan",
+      "employeeInfo": null,
       "status": "PENDING",
-      "full_timestamp": "2025-12-25T11:33:02.821Z",
-      "time": "11:33:02 AM",
-      "date": "December 25, 2025"
-    }
-  ],
-  "chats": [
+      "pointsEarned": 1,
+      "time": "11:28:18 AM",
+      "date": "12/26/2025"
+    },
     {
-      "sender": "System",
-      "text": "⭐ Sultan memberi 3 bintang!",
-      "time": "Now"
+      "id": 1766748511465,
+      "item": "dieMOTOR [Standard]",
+      "price": 15000,
+      "origin": "pulau burung ",
+      "destination": "Jl. Sultan Syarif Kasim No. 123 (Rumah)",
+      "paymentMethod": "M-Banking Indonesia",
+      "employeeInfo": null,
+      "status": "PENDING",
+      "pointsEarned": 1,
+      "time": "11:28:31 AM",
+      "date": "12/26/2025"
     }
   ],
-  "reviews": [
+  "chats": [],
+  "vouchers": [
     {
-      "rating": 3,
-      "time": "2025-12-24T13:34:29.547Z"
+      "code": "SULTAN313",
+      "discount": 10000,
+      "minOrder": 20000
+    },
+    {
+      "code": "MAKANGRATIS",
+      "discount": 5000,
+      "minOrder": 15000
     }
   ],
+  "reports": [],
   "system": {
-    "maintenance": "OFF",
-    "version": "5.5",
-    "total_transactions": 1
+    "downloads": 1540,
+    "total_revenue": 0
   }
 }

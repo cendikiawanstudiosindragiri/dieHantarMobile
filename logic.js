@@ -183,3 +183,19 @@ function openWalletAction(action) {
   else if (action === "qris")
     alert("Buka kamera untuk Scan QRIS... (Simulasi)");
 }
+
+// Fungsi untuk set alamat cepat
+function setQuickAddress(type) {
+  const inputDest = document.getElementById("input-destination");
+  if (type === "RUMAH") {
+    inputDest.value = "Jl. Sultan Syarif Kasim No. 123 (Rumah)";
+  } else if (type === "KANTOR") {
+    inputDest.value = "Sambu Group Indragiri (Kantor)";
+  }
+  // Beri efek feedback sedikit
+  inputDest.classList.add("border-orange-500", "bg-orange-50");
+  setTimeout(
+    () => inputDest.classList.remove("border-orange-500", "bg-orange-50"),
+    1000,
+  );
+}

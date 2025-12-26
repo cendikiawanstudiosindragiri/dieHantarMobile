@@ -122,3 +122,16 @@ window.onload = () => {
     window.location.port === "4000" ? "#2563eb" : "#ea580c",
   );
 };
+
+function SultanNotify(message, type = "success") {
+  const notifyDiv = document.createElement("div");
+  notifyDiv.className = `fixed top-10 left-1/2 -translate-x-1/2 z-[999] px-6 py-4 rounded-[2rem] shadow-2xl backdrop-blur-md border ${type === "success" ? "bg-zinc-900/90 border-orange-500 text-white" : "bg-red-600 text-white"} fade-in`;
+  notifyDiv.innerHTML = `
+        <div class="flex items-center gap-3">
+            <i class="fas ${type === "success" ? "fa-check-circle text-orange-500" : "fa-exclamation-triangle"}"></i>
+            <span class="text-[9px] font-black uppercase tracking-widest">${message}</span>
+        </div>
+    `;
+  document.body.appendChild(notifyDiv);
+  setTimeout(() => notifyDiv.remove(), 3000);
+}
