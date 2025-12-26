@@ -26,6 +26,7 @@ const AuthManager = {
             buttonElement.innerText = 'Masuk Sekarang';
             toggleTextElement.innerHTML = 'Belum punya akun? <span class="text-orange-500">Daftar Sultan</span>';
             fullnameField.classList.add('hidden');
+            fullnameField.required = false;
         } else {
             titleElement.innerHTML = `<h2 class="font-montserrat text-xl font-extrabold italic text-white">Daftar Akun Sultan</h2><p class="text-[9px] text-zinc-400 uppercase font-bold mt-1">Bergabung dengan ekosistem dieHantar.</p>`;
             buttonElement.innerText = 'Buat Akun Sekarang';
@@ -81,6 +82,9 @@ const AuthManager = {
         }
     }
 };
+
+// Make AuthManager globally accessible for inline event handlers in login.html
+window.AuthManager = AuthManager;
 
 // Attach event listener to the form
 document.getElementById('auth-form').addEventListener('submit', (event) => AuthManager.handleAuth(event));
