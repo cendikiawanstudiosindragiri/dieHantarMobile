@@ -1,0 +1,77 @@
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <title>Selamat Datang di dieHantar</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap');
+        body { font-family: 'Inter', sans-serif; }
+    </style>
+</head>
+<body class="bg-zinc-950">
+
+    <div id="onboarding-screen" class="fixed inset-0 bg-zinc-950 z-[1000] flex flex-col overflow-hidden">
+        <!-- Slider Container -->
+        <div id="onboarding-slider" class="flex-1 flex transition-transform duration-500 ease-out">
+            
+            <!-- Slide 1: Sultan Mobility -->
+            <div class="w-full flex-shrink-0 flex flex-col items-center justify-center p-10 text-center">
+                <div class="w-64 h-64 bg-zinc-900 rounded-[3rem] mb-10 flex items-center justify-center border border-white/5 shadow-2xl">
+                    <i class="fas fa-motorcycle text-6xl text-orange-500 animate-bounce"></i>
+                </div>
+                <h2 class="text-2xl font-black italic uppercase tracking-tighter text-white">Sultan Mobility</h2>
+                <p class="text-[10px] text-zinc-400 font-bold uppercase tracking-widest mt-4 leading-relaxed">
+                    Solusi transportasi elit untuk mobilitas Sultan di wilayah Indragiri Hilir, Riau.
+                </p>
+            </div>
+    
+            <!-- Slide 2: Logistik Cerdas -->
+            <div class="w-full flex-shrink-0 flex flex-col items-center justify-center p-10 text-center">
+                <div class="w-64 h-64 bg-zinc-900 rounded-[3rem] mb-10 flex items-center justify-center border border-white/5 shadow-2xl">
+                    <i class="fas fa-box-open text-6xl text-blue-500 animate-pulse"></i>
+                </div>
+                <h2 class="text-2xl font-black italic uppercase tracking-tighter text-white">Logistik Cerdas</h2>
+                <p class="text-[10px] text-zinc-400 font-bold uppercase tracking-widest mt-4 leading-relaxed">
+                    Pengiriman barang secepat kilat dikelola langsung oleh tim profesional Cendikiawan Studios.
+                </p>
+            </div>
+    
+            <!-- Slide 3: Eco-Sultan -->
+            <div class="w-full flex-shrink-0 flex flex-col items-center justify-center p-10 text-center">
+                <div class="w-64 h-64 bg-zinc-900 rounded-[3rem] mb-10 flex items-center justify-center border border-white/5 shadow-2xl relative overflow-hidden">
+                    <i class="fas fa-leaf text-6xl text-emerald-500"></i>
+                    <i class="fas fa-sun absolute top-6 right-6 text-yellow-500/20 text-4xl"></i>
+                </div>
+                <h2 class="text-2xl font-black italic uppercase tracking-tighter text-white">Eco-Sultan</h2>
+                <p class="text-[10px] text-zinc-400 font-bold uppercase tracking-widest mt-4 leading-relaxed">
+                    Mendukung keberlanjutan lingkungan Sambu Group dengan integrasi teknologi UPAL-BES.
+                </p>
+            </div>
+    
+        </div>
+    
+        <!-- Controls -->
+        <div class="p-10 space-y-6">
+            <div class="flex justify-center gap-2" id="slider-dots">
+                <div class="w-8 h-1 bg-orange-500 rounded-full"></div>
+                <div class="w-2 h-1 bg-zinc-800 rounded-full"></div>
+                <div class="w-2 h-1 bg-zinc-800 rounded-full"></div>
+            </div>
+            
+            <button onclick="Onboarding.next()" class="w-full py-5 bg-white text-zinc-950 rounded-3xl font-black uppercase text-[10px] shadow-xl active:scale-95 transition-all tracking-widest">
+                Lanjutkan Perjalanan
+            </button>
+            
+            <button onclick="Onboarding.skip()" class="w-full py-2 text-zinc-500 font-black uppercase text-[8px] tracking-[0.3em]">
+                Lewati Onboarding
+            </button>
+        </div>
+    </div>
+
+    <script src="onboarding.js"></script>
+</body>
+</html>

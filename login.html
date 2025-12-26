@@ -1,209 +1,61 @@
-<!doctype html>
+
+<!DOCTYPE html>
 <html lang="id">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
-    <title>dieHantar - Access Portal</title>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <title>Masuk - dieHantar Mobile</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-      @import url("https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;700;800&display=swap");
-      body {
-        font-family: "Plus Jakarta Sans", sans-serif;
-        overflow: hidden;
-      }
-      .fade-in { animation: fadeIn 0.5s ease-out forwards; }
-      @keyframes fadeIn {
-        from { opacity: 0; transform: translateY(10px); }
-        to { opacity: 1; transform: translateY(0); }
-      }
-      .splash-logo { animation: pulseLogo 2s infinite ease-in-out; }
-      @keyframes pulseLogo {
-        0%, 100% { transform: scale(1); }
-        50% { transform: scale(1.1); }
-      }
-      .dev-glow { animation: devGlow 2s infinite alternate; }
-      @keyframes devGlow {
-        from { box-shadow: 0 0 10px #f97316; }
-        to { box-shadow: 0 0 30px #fbbf24; }
-      }
-      .matrix-text {
-        font-family: monospace; color: #10b981; overflow: hidden;
-        border-right: 0.15em solid orange; white-space: nowrap; margin: 0 auto;
-        letter-spacing: 0.15em; animation: typing 3.5s steps(30, end), blink-caret 0.5s step-end infinite;
-      }
-      @keyframes typing { from { width: 0; } to { width: 100%; } }
-      @keyframes blink-caret { from, to { border-color: transparent; } 50% { border-color: orange; } }
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&family=Montserrat:ital,wght@1,800&display=swap');
+        body { font-family: 'Inter', sans-serif; }
+        .font-montserrat { font-family: 'Montserrat', sans-serif; }
     </style>
-  </head>
-  <body class="bg-orange-500 min-h-screen flex items-center justify-center p-6 relative">
+</head>
+<body class="bg-zinc-950">
+
+    <div class="min-h-screen bg-zinc-950 flex flex-col justify-center p-8">
+        <div class="text-center mb-10 fade-in">
+            <h1 class="font-montserrat text-3xl font-extrabold italic text-white tracking-tighter">dieHantar <span class="text-orange-500">MOBILE</span></h1>
+            <p class="text-[8px] font-bold text-zinc-500 uppercase tracking-[0.4em] mt-2">Powered by Cendikiawan Studios</p>
+        </div>
     
-    <div class="absolute -top-24 -left-24 w-64 h-64 bg-orange-400 rounded-full opacity-30"></div>
-    <div class="absolute -bottom-24 -right-24 w-80 h-80 bg-orange-600 rounded-full opacity-30"></div>
-
-    <div id="section-splash" class="flex flex-col items-center justify-center text-white text-center z-20">
-      <div class="w-24 h-24 bg-white text-orange-600 rounded-[2.5rem] flex items-center justify-center shadow-2xl mb-6 splash-logo">
-        <i class="fas fa-paper-plane text-4xl"></i>
-      </div>
-      <h1 class="text-4xl font-black italic tracking-tighter mb-2">dieHantar</h1>
-      <p class="text-[10px] font-bold uppercase tracking-[0.3em] opacity-80 italic">Syncing Quantum System...</p>
-    </div>
-
-    <div id="section-login" class="hidden w-full max-w-sm bg-white rounded-[3.5rem] p-10 shadow-2xl z-30 fade-in text-center">
-      <div class="mb-8 text-center">
-        <div class="w-16 h-16 bg-orange-100 text-orange-600 rounded-3xl flex items-center justify-center mx-auto mb-4 text-2xl shadow-inner">
-          <i class="fas fa-key"></i>
+        <div class="bg-zinc-900/50 border border-white/5 p-8 rounded-[2.5rem] backdrop-blur-xl shadow-2xl">
+            <div id="auth-title" class="mb-8">
+                <h2 class="font-montserrat text-xl font-extrabold italic text-white">Selamat Datang, Sultan!</h2>
+                <p class="text-[9px] text-zinc-400 uppercase font-bold mt-1">Masuk untuk memulai perjalanan.</p>
+            </div>
+    
+            <form id="auth-form" class="space-y-4">
+                <input type="text" id="fullname" placeholder="Nama Lengkap Sultan" class="hidden w-full bg-zinc-800 border-none rounded-2xl p-5 text-white text-xs font-bold focus:ring-2 focus:ring-orange-500 transition-all">
+                <input type="email" id="email" placeholder="Email Sultan" required class="w-full bg-zinc-800 border-none rounded-2xl p-5 text-white text-xs font-bold focus:ring-2 focus:ring-orange-500 transition-all">
+                <input type="password" id="password" placeholder="Password" required class="w-full bg-zinc-800 border-none rounded-2xl p-5 text-white text-xs font-bold focus:ring-2 focus:ring-orange-500 transition-all">
+                
+                <button type="submit" id="btn-auth" class="w-full py-5 bg-orange-500 text-white rounded-2xl font-black uppercase text-[10px] shadow-lg shadow-orange-500/20 active:scale-95 transition-all mt-4">
+                    Masuk Sekarang
+                </button>
+            </form>
+    
+            <div class="mt-8 text-center">
+                <button onclick="AuthManager.toggleMode()" id="toggle-text" class="text-[9px] text-zinc-500 font-bold uppercase tracking-widest hover:text-white transition-all">
+                    Belum punya akun? <span class="text-orange-500">Daftar Sultan</span>
+                </button>
+            </div>
         </div>
-        <h2 class="text-2xl font-black italic text-orange-600 tracking-tighter">Selamat Datang!</h2>
-        <p class="text-[10px] font-bold text-gray-400 uppercase tracking-widest mt-1 italic">Masuk ke Sesi dieHantar</p>
-      </div>
-
-      <div class="space-y-4">
-        <input id="login-user" type="text" placeholder="Username" class="w-full bg-gray-50 rounded-2xl px-6 py-4 text-sm outline-none border-none focus:ring-2 focus:ring-orange-500 transition-all text-gray-700" />
-        <input id="login-pass" type="password" placeholder="Password" class="w-full bg-gray-50 rounded-2xl px-6 py-4 text-sm outline-none border-none focus:ring-2 focus:ring-orange-500 transition-all text-gray-700" />
-        <div class="text-right pr-2">
-          <button onclick="openForgot()" class="text-[9px] font-black text-orange-600 uppercase tracking-widest italic">Lupa Password?</button>
+    
+        <div class="mt-12 text-center opacity-30">
+            <p class="text-[7px] text-zinc-400 font-bold uppercase tracking-[0.2em]">Kemitraan Eksklusif: Sambu Group & Cendikiawan Studios</p>
         </div>
-        <button onclick="handleLoginAction()" class="w-full py-5 bg-orange-600 text-white rounded-2xl font-black uppercase italic shadow-lg active:scale-95 transition-all mt-2 flex items-center justify-center gap-3">
-          <span>Masuk Sekarang</span>
-          <i class="fas fa-arrow-right text-xs"></i>
-        </button>
-      </div>
-      <p class="text-center mt-8 text-[10px] font-bold text-gray-400 uppercase tracking-widest">
-        Belum punya akun? <button onclick="showSection('register')" class="text-orange-600 font-black">Daftar</button>
-      </p>
     </div>
 
-    <div id="section-register" class="hidden w-full max-w-sm bg-white rounded-[3.5rem] p-10 shadow-2xl z-30 fade-in text-center">
-      <div class="text-center mb-8">
-        <div class="w-16 h-16 bg-zinc-100 text-zinc-900 rounded-3xl flex items-center justify-center mx-auto mb-4 text-2xl shadow-inner"><i class="fas fa-id-card"></i></div>
-        <h2 class="text-2xl font-black italic text-orange-600 tracking-tighter">Daftar Sultan</h2>
-        <p class="text-[10px] font-bold text-gray-400 uppercase tracking-widest mt-1">Siapa Nama Anda, Sultan?</p>
-      </div>
-      <div class="space-y-4">
-        <input id="reg-name" type="text" placeholder="Nama Lengkap" class="w-full bg-gray-50 rounded-2xl px-6 py-4 text-sm outline-none border-none focus:ring-2 focus:ring-orange-500 text-gray-700 font-bold" />
-        <input id="reg-user" type="text" placeholder="Username Baru" class="w-full bg-gray-50 rounded-2xl px-6 py-4 text-sm outline-none border-none focus:ring-2 focus:ring-orange-500 text-gray-700" />
-        <input id="reg-pass" type="password" placeholder="Password Baru" class="w-full bg-gray-50 rounded-2xl px-6 py-4 text-sm outline-none border-none focus:ring-2 focus:ring-orange-500 text-gray-700" />
-        <button onclick="handleRegisterAction()" class="w-full py-5 bg-zinc-900 text-white rounded-2xl font-black uppercase italic shadow-lg active:scale-95 transition-all mt-4 flex items-center justify-center gap-3">
-          <span>Daftarkan Identitas</span>
-          <i class="fas fa-check-circle text-xs"></i>
-        </button>
-      </div>
-      <p class="text-center mt-8 text-[10px] font-bold text-gray-400 uppercase tracking-widest">
-        Sudah punya akun? <button onclick="showSection('login')" class="text-orange-600 font-black">Masuk</button>
-      </p>
-    </div>
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore.js"></script>
 
-    <div id="modal-forgot" class="hidden fixed inset-0 bg-black/80 z-[100] flex items-center justify-center p-8 backdrop-blur-sm text-center">
-      <div class="bg-white w-full max-w-xs rounded-[3rem] p-10 shadow-2xl">
-        <i class="fas fa-lock-open text-2xl text-gray-400 mb-4"></i>
-        <h3 class="text-xl font-black italic text-gray-800 mb-2 tracking-tighter">Reset Pass</h3>
-        <input id="forgot-email" type="email" placeholder="email@anda.com" class="w-full bg-gray-50 rounded-2xl px-6 py-4 text-sm outline-none mb-6 text-center" />
-        <button onclick="sendForgot()" class="w-full py-5 bg-zinc-900 text-white rounded-2xl font-black uppercase italic shadow-lg">Kirim Link</button>
-        <button onclick="closeForgot()" class="mt-4 text-[10px] font-black text-gray-400 uppercase">Batal</button>
-      </div>
-    </div>
-
-    <div id="overlay-dev" class="hidden fixed inset-0 bg-slate-950 z-[200] flex flex-col items-center justify-center text-center">
-      <div class="w-24 h-24 bg-orange-500 rounded-[2rem] flex items-center justify-center mb-6 dev-glow shadow-orange-500/50">
-        <i class="fas fa-terminal text-white text-4xl"></i>
-      </div>
-      <p class="matrix-text italic">SYSTEM ACCESS GRANTED</p>
-      <h2 class="text-white font-black italic text-xl mt-4 tracking-widest uppercase">Welcome Master Dev</h2>
-      <p class="text-orange-500 text-[8px] font-bold mt-2 uppercase tracking-[0.4em]">Cendikiawan Studio Indragiri</p>
-    </div>
-
-    <div class="fixed bottom-10 right-6 z-[9999]">
-      <button onclick="quantumBypass()" class="w-14 h-14 bg-zinc-900 text-orange-500 rounded-full shadow-2xl border-2 border-orange-500/50 flex items-center justify-center active:scale-90 transition-all group relative">
-        <i class="fas fa-code text-xl"></i>
-        <span class="absolute right-16 bg-zinc-900 text-white text-[8px] px-3 py-1.5 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity border border-orange-500 uppercase font-black tracking-widest">Quantum Bypass</span>
-      </button>
-    </div>
-
-    <script src="auth.js"></script>
-
-    <script>
-      const DEV_USER = "dev";
-      const DEV_PASS = "123";
-
-      window.onload = () => {
-        // Splash Screen Effect
-        setTimeout(() => {
-          if (localStorage.getItem("isLoggedIn") === "true") {
-            redirectUser();
-          } else {
-            showSection("login");
-          }
-        }, 2500);
-      };
-
-      function showSection(id) {
-        document.getElementById("section-splash").classList.add("hidden");
-        document.getElementById("section-login").classList.add("hidden");
-        document.getElementById("section-register").classList.add("hidden");
-        document.getElementById("section-" + id).classList.remove("hidden");
-      }
-
-      // --- LOGIN ACTION ---
-      async function handleLoginAction() {
-        const u = document.getElementById("login-user").value;
-        const p = document.getElementById("login-pass").value;
-        
-        if (!u || !p) return alert("Isi dulu Sultan!");
-
-        // Trigger Dev Animation jika login sebagai dev
-        if (u === DEV_USER && p === DEV_PASS) {
-          await login(u, p); // Panggil fungsi login di auth.js
-          triggerDevAnimation();
-        } else {
-          await login(u, p);
-        }
-      }
-
-      // --- REGISTER ACTION ---
-      async function handleRegisterAction() {
-        const name = document.getElementById("reg-name").value;
-        const user = document.getElementById("reg-user").value;
-        const pass = document.getElementById("reg-pass").value;
-        
-        if (!name || !user || !pass) return alert("Lengkapi data Sultan!");
-
-        // Simulasi Register (Bisa dikembangkan ke API /api/register)
-        alert("✅ Registrasi Sultan Berhasil! Silakan Masuk.");
-        showSection('login');
-      }
-
-      function quantumBypass() {
-        // Bypass langsung ke dev mode tanpa input
-        localStorage.setItem("isLoggedIn", "true");
-        localStorage.setItem("active_role", "developer");
-        localStorage.setItem("user_data", JSON.stringify({name: "Master Developer", username: "dev"}));
-        triggerDevAnimation();
-      }
-
-      function triggerDevAnimation() {
-        document.getElementById("section-login").classList.add("hidden");
-        document.getElementById("overlay-dev").classList.remove("hidden");
-        setTimeout(() => redirectUser(), 3000);
-      }
-
-      function redirectUser() {
-        const port = window.location.port;
-        window.location.href = port === "4000" ? "driver.html" : "index.html";
-      }
-
-      function openForgot() { document.getElementById("modal-forgot").classList.remove("hidden"); }
-      function closeForgot() { document.getElementById("modal-forgot").classList.add("hidden"); }
-      
-      function sendForgot() {
-        alert("✅ Instruksi dikirim ke email Sultan!");
-        closeForgot();
-      }
-
-      // Keyboard Enter Support
-      document.addEventListener("keypress", (e) => {
-        if (e.key === "Enter") handleLoginAction();
-      });
-    </script>
-  </body>
+    <!-- Firebase Config & Logic -->
+    <script src="firebase.js"></script>
+    <script src="auth-logic.js"></script>
+</body>
 </html>

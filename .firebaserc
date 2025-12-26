@@ -1,0 +1,7 @@
+{
+  "projects": {
+    "firebase deploy --only functions": "diehantarmobile-f499b"
+  },
+  "targets": {},
+  "etags": {}
+}

@@ -134,7 +134,7 @@ const dieHantarUI = {
             <div class="bg-zinc-100 rounded-[2.5rem] h-52 w-full relative overflow-hidden shadow-inner border border-gray-200 fade-in">
                 <div class="absolute inset-0 opacity-10" style="background-image: linear-gradient(#000 1px, transparent 1px), linear-gradient(90deg, #000 1px, transparent 1px); background-size: 30px 30px;"></div>
                 <div class="absolute top-1/2 left-10 right-10 h-1.5 bg-gray-200 rounded-full -translate-y-1/2"></div>
-                <div class="absolute top-1/2 left-10 h-1.5 bg-orange-500 rounded-full -translate-y-1/2 transition-all duration-1000 shadow-[0_0_10px_rgba(234,88,12,0.5)]" style="width: ${progress}%"></div>
+                <div class="absolute top-1/2 left-10 h-1.5 bg-orange-500 rounded-full -translate-y-1/2 transition-all duration-1000 shadow-[0_0_10px_rgba(234,88,12,0.5)]" style="width: ${progress}%" ></div>
                 <div class="absolute top-1/2 right-8 -translate-y-1/2 flex flex-col items-center">
                     <div class="w-10 h-10 bg-white rounded-full shadow-xl flex items-center justify-center text-zinc-900 border-4 border-orange-500 animate-bounce"><i class="fas fa-street-view"></i></div>
                     <p class="text-[6px] font-black uppercase mt-2 tracking-tighter">Lokasi Sultan</p>

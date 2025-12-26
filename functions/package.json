@@ -1,0 +1,14 @@
+{
+  "name": "dihantar-functions",
+  "version": "1.0.0",
+  "description": "Cloud Functions for dieHantar App",
+  "main": "index.js",
+  "dependencies": {
+    "firebase-admin": "^10.0.2",
+    "firebase-functions": "^3.18.0"
+  },
+  "engines": {
+    "node": "16"
+  },
+  "private": true
+}

@@ -1,0 +1,71 @@
+
+<!doctype html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
+    <title>Pilih Peran - dieHantar</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <style>
+        @import url("https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@700;800&display=swap");
+        body {
+            font-family: "Plus Jakarta Sans", sans-serif;
+        }
+        .role-card {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .role-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+        }
+    </style>
+</head>
+<body class="bg-zinc-950 flex items-center justify-center min-h-screen p-8">
+
+    <div class="w-full max-w-md text-center">
+        <i class="fas fa-crown text-5xl text-orange-500 mb-6"></i>
+        <h1 class="text-2xl font-black italic text-white uppercase mb-2">Selamat Datang, Sultan!</h1>
+        <p class="text-zinc-400 font-semibold mb-12">Pilih peran Anda untuk melanjutkan</p>
+
+        <div class="space-y-6">
+            <!-- Pilihan Pengguna Umum -->
+            <div onclick="selectRole('user')" class="role-card cursor-pointer bg-gradient-to-br from-orange-500 to-orange-700 p-8 rounded-[3rem] shadow-2xl border-2 border-orange-400/50">
+                <div class="flex items-center gap-6">
+                    <div class="w-20 h-20 bg-white/20 rounded-3xl flex items-center justify-center text-white text-4xl">
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <div>
+                        <h2 class="text-2xl font-black text-white text-left uppercase italic">Pengguna</h2>
+                        <p class="text-orange-200 text-left text-sm font-semibold">Pesan layanan dan nikmati kemudahan.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Pilihan Mitra Driver -->
+            <div onclick="selectRole('driver')" class="role-card cursor-pointer bg-gradient-to-br from-blue-600 to-indigo-900 p-8 rounded-[3rem] shadow-2xl border-2 border-blue-400/50">
+                <div class="flex items-center gap-6">
+                    <div class="w-20 h-20 bg-white/20 rounded-3xl flex items-center justify-center text-white text-4xl">
+                        <i class="fas fa-motorcycle"></i>
+                    </div>
+                    <div>
+                        <h2 class="text-2xl font-black text-white text-left uppercase italic">Mitra</h2>
+                        <p class="text-blue-200 text-left text-sm font-semibold">Cari orderan dan hasilkan pendapatan.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function selectRole(role) {
+            console.log(`Peran dipilih: ${role}`);
+            // Simpan peran yang dipilih ke localStorage
+            localStorage.setItem('active_role', role);
+            // Arahkan ke halaman aplikasi utama
+            window.location.href = 'index.html';
+        }
+    </script>
+
+</body>
+</html>

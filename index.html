@@ -1,291 +1,103 @@
+
 <!doctype html>
 <html lang="id">
-  <head>
+<head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
-    <title>dieHantar - Sultan Super App</title>
+    <title>dieHantar - Aplikasi Sultan</title>
 
+    <!-- Libraries & Styles -->
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
-
+    <link rel="stylesheet" href="app-styles.css" />
     <style>
-      @import url("https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap");
-
-      html, body {
-        font-family: "Plus Jakarta Sans", sans-serif;
-        background: #000;
-        height: 100dvh;
-        margin: 0;
-        overflow: hidden;
-      }
-
-      .app-wrapper {
-        display: flex;
-        flex-direction: column;
-        height: 100dvh;
-        width: 100%;
-        max-width: 450px;
-        margin: 0 auto;
-        background: #f9fafb;
-        position: relative;
-      }
-
-      .scroll-container {
-        flex: 1;
-        overflow-y: auto;
-        -webkit-overflow-scrolling: touch;
-        padding-bottom: 40px;
-      }
-
-      .no-scrollbar::-webkit-scrollbar { display: none; }
-
-      .glass-nav {
-        background: rgba(255, 255, 255, 0.95);
-        backdrop-filter: blur(10px);
-        border-top: 1px solid rgba(0, 0, 0, 0.05);
-        padding-bottom: calc(0.5rem + env(safe-area-inset-bottom));
-        flex-shrink: 0;
-      }
-
-      .active-tab { color: #ea580c !important; }
-      .active-tab i { transform: translateY(-2px); transition: all 0.3s ease; }
-
-      .page-content { animation: slideUp 0.3s ease-out forwards; }
-      @keyframes slideUp {
-        from { opacity: 0; transform: translateY(15px); }
-        to { opacity: 1; transform: translateY(0); }
-      }
-
-      .fade-in { animation: fadeIn 0.5s ease-in-out; }
-      @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-
-      .pt-card { transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); border: 2px solid transparent; }
-      .pt-card.active {
-        border-color: #ea580c;
-        background-color: #fff7ed;
-        transform: scale(1.02);
-        box-shadow: 0 10px 15px -3px rgba(234, 88, 12, 0.1);
-      }
-
-      .wallet-card { background: linear-gradient(135deg, #18181b 0%, #3f3f46 100%); }
-      #active-order-badge { box-shadow: 0 0 10px rgba(234, 88, 12, 0.5); }
-
-      @keyframes bounceSlow {
-        0%, 100% { transform: translateY(0); }
-        50% { transform: translateY(-8px); }
-      }
-      .animate-bounce-slow { animation: bounceSlow 3s infinite ease-in-out; }
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&family=Montserrat:ital,wght@1,800&display=swap');
+        body { font-family: 'Inter', sans-serif; background-color: #f4f4f5; }
+        .font-montserrat { font-family: 'Montserrat', sans-serif; }
+        .page { display: none; }
+        .page.active { display: block; }
     </style>
-  </head>
-  <body class="flex justify-center items-center bg-zinc-950">
-    <audio id="audio-ding" src="https://assets.mixkit.co/active_storage/sfx/2869/2869-preview.mp3" preload="auto"></audio>
+</head>
+<body>
 
-    <div class="app-wrapper shadow-2xl">
-      <header id="app-header" class="bg-gradient-to-br from-orange-500 to-orange-700 p-6 rounded-b-[3.5rem] shadow-lg flex-shrink-0 z-50">
-        <div class="flex justify-between items-center text-white">
-          <div class="flex items-center gap-3">
-            <div class="w-10 h-10 rounded-xl bg-white/20 p-0.5 border border-white/30 overflow-hidden shadow-inner">
-              <img id="user-avatar" src="" class="w-full h-full object-cover" />
-            </div>
-            <div>
-              <p class="text-white/60 text-[7px] font-black uppercase tracking-widest leading-none mb-1">Halo Sultan,</p>
-              <h1 id="user-display-name" class="text-xs font-black italic uppercase leading-none">---</h1>
-            </div>
-          </div>
-          <button onclick="syncAll()" class="w-10 h-10 bg-white/10 rounded-2xl flex items-center justify-center active:rotate-180 transition-transform duration-500">
-            <i class="fas fa-sync-alt text-xs"></i>
-          </button>
-        </div>
-        <div class="mt-6 bg-zinc-950 p-5 rounded-[2rem] flex justify-between items-center border border-white/5 shadow-xl">
-          <div>
-            <p class="text-zinc-500 text-[7px] uppercase font-black tracking-[0.2em] mb-1">DIEHANTAR PAY</p>
-            <h2 id="balance" class="text-white text-xl font-black italic tracking-tighter leading-none">Rp 0</h2>
-          </div>
-          <button onclick="switchPage('wallet-hub')" class="bg-orange-600 text-white px-4 py-2 rounded-xl text-[9px] font-black uppercase shadow-lg active:scale-95 transition-all">Details</button>
-        </div>
-      </header>
+    <div class="sultan-app max-w-sm mx-auto">
 
-      <main id="main-scroll-container" class="scroll-container no-scrollbar">
-        <div id="status-area" class="px-6 py-4"></div>
+        <!-- Main Content Area -->
+        <main class="p-6">
 
-        <div id="welcome-banner" class="px-6 pt-6 fade-in">
-          <div class="bg-white p-6 rounded-[2.5rem] border border-gray-100 shadow-sm relative overflow-hidden">
-            <div class="relative z-10">
-              <h3 class="text-[10px] font-black text-orange-600 uppercase tracking-widest mb-1">Welcome Back!</h3>
-              <h2 class="text-xl font-black italic text-zinc-900 leading-tight">SELAMAT DATANG, <br /><span id="welcome-name" class="text-orange-600">SULTAN...</span>!</h2>
+            <!-- Page: Home -->
+            <div id="page-home" class="page active space-y-8">
+                <header id="app-header" class="flex justify-between items-center">
+                    <div>
+                        <p class="text-xs text-zinc-500">Lokasi Anda</p>
+                        <h2 class="font-bold text-zinc-800">Indragiri Hilir <i class="fas fa-chevron-down text-xs"></i></h2>
+                    </div>
+                    <div class="w-12 h-12 bg-white rounded-full flex items-center justify-center shadow-md">
+                        <i class="fas fa-bell text-xl text-zinc-500"></i>
+                    </div>
+                </header>
+                <div id="sultan-card" class="bg-zinc-900 text-white p-8 rounded-[2.5rem] shadow-2xl shadow-zinc-900/50">
+                     <p class="text-sm text-zinc-400 font-montserrat italic">dieHantar Pay</p>
+                     <p id="user-balance" class="text-3xl font-bold mt-2">Rp 0</p>
+                     <div class="mt-6 flex justify-between items-center">
+                        <p class="font-bold" id="user-name">Sultan</p>
+                        <button class="bg-orange-500 text-white text-xs font-bold py-2 px-4 rounded-full">Top Up</button>
+                     </div>
+                </div>
+                <div id="services-grid" class="grid grid-cols-4 gap-4 text-center">
+                     <!-- Service items will be injected by app.js -->
+                </div>
             </div>
-            <i class="fas fa-crown absolute -right-4 -bottom-4 text-7xl opacity-5 rotate-12 text-orange-500"></i>
-          </div>
-        </div>
 
-        <div id="page-home" class="page-content p-6 space-y-8"></div>
-        <div id="page-all-services" class="page-content hidden p-6 space-y-10 pb-20">
-          <div id="live-tracking-slot"></div>
-          <div id="services-grid-transport"></div>
-        </div>
-        <div id="page-promo" class="page-content hidden p-6 space-y-6 pb-20">
-          <h2 class="text-xl font-black italic text-zinc-900 uppercase">Promo Sultan</h2>
-          <div id="promo-list" class="grid grid-cols-1 gap-4"></div>
-        </div>
-        <div id="page-history" class="page-content hidden p-6 space-y-6 pb-20">
-          <h2 class="text-xl font-black italic text-zinc-900 uppercase">Riwayat Trip</h2>
-          <div id="history-list" class="space-y-3"></div>
-        </div>
-        <div id="page-chat" class="page-content hidden p-6 flex flex-col h-[70dvh]">
-          <h2 class="text-xl font-black italic text-zinc-900 uppercase mb-4">Pesan Mitra</h2>
-          <div id="chat-box-user" class="flex-1 overflow-y-auto no-scrollbar space-y-4 mb-4 p-2"></div>
-          <div class="flex gap-2 bg-white p-2 rounded-2xl shadow-xl border border-gray-100">
-            <input id="chat-input-user" type="text" placeholder="Balas mitra..." class="flex-1 px-4 outline-none text-xs bg-transparent" />
-            <button onclick="sendSultanChat()" class="w-10 h-10 bg-orange-600 text-white rounded-xl flex items-center justify-center active:scale-90 transition-all"><i class="fas fa-paper-plane text-xs"></i></button>
-          </div>
-        </div>
-        <div id="page-profile" class="page-content hidden p-6 space-y-8 pb-20">
-          <div class="text-center space-y-3">
-            <div class="relative w-28 h-28 mx-auto">
-              <div class="w-full h-full bg-orange-100 rounded-[3rem] overflow-hidden border-4 border-white shadow-xl p-1">
-                <img id="prof-avatar-large" src="" class="w-full h-full rounded-[2.8rem] object-cover" />
-              </div>
+            <!-- Page: History -->
+            <div id="page-history" class="page">
+                <h1 class="text-2xl font-montserrat font-extrabold italic text-zinc-800">Riwayat Perjalanan</h1>
+                <div class="mt-6 space-y-4" id="history-list-container">
+                    <p class="text-zinc-500">Tidak ada riwayat perjalanan ditemukan.</p>
+                    <!-- History items will be injected here -->
+                </div>
             </div>
-            <h2 id="prof-name-display" class="text-2xl font-black italic text-zinc-900 uppercase">---</h2>
-          </div>
-          <div id="user-stats-container"></div>
-          <div id="profile-menu-container" class="space-y-3">
-            <button onclick="logout()" class="w-full py-5 bg-red-50 text-red-600 border border-red-100 rounded-[2rem] px-6 flex justify-between items-center active:scale-95 transition-all">
-              <div class="flex items-center gap-4">
-                <div class="w-10 h-10 bg-red-100 rounded-2xl flex items-center justify-center"><i class="fas fa-power-off text-xs"></i></div>
-                <span class="text-[10px] font-black uppercase tracking-widest">Keluar Portal</span>
-              </div>
-            </button>
-          </div>
-        </div>
-        <div id="page-wallet-hub" class="page-content hidden p-6 space-y-8 pb-24">
-          <div class="flex items-center gap-4">
-            <button onclick="switchPage('home')" class="w-10 h-10 bg-white rounded-2xl flex items-center justify-center shadow-sm text-zinc-400 active:scale-90"><i class="fas fa-arrow-left text-xs"></i></button>
-            <h2 class="text-xl font-black italic text-zinc-900 uppercase">Financial Hub</h2>
-          </div>
-          <div class="wallet-card p-8 rounded-[3rem] text-white shadow-2xl relative overflow-hidden h-52 flex flex-col justify-between border border-white/10">
-            <div class="relative z-10 flex justify-between items-start">
-              <div>
-                <p class="text-[8px] font-black text-orange-500 uppercase tracking-[0.3em] mb-1">dieHantar Platinum Card</p>
-                <i class="fas fa-microchip text-2xl text-yellow-500/50"></i>
-              </div>
-              <i class="fab fa-mastercard text-3xl opacity-50"></i>
-            </div>
-            <div class="relative z-10">
-              <p class="text-[9px] font-bold text-white/50 uppercase tracking-widest">Saldo Sultan</p>
-              <h2 id="wallet-balance-big" class="text-3xl font-black italic tracking-tighter">Rp 0</h2>
-            </div>
-            <div class="absolute -right-10 -bottom-10 w-40 h-40 bg-orange-600/20 rounded-full blur-3xl"></div>
-          </div>
-          <div class="grid grid-cols-4 gap-3">
-            <button onclick="openWalletAction('topup')" class="flex flex-col items-center gap-2">
-              <div class="w-12 h-12 bg-white rounded-2xl flex items-center justify-center shadow-sm text-orange-600"><i class="fas fa-plus-circle"></i></div>
-              <span class="text-[7px] font-black uppercase text-zinc-500">Isi Saldo</span>
-            </button>
-            <button onclick="openWalletAction('transfer')" class="flex flex-col items-center gap-2">
-              <div class="w-12 h-12 bg-white rounded-2xl flex items-center justify-center shadow-sm text-blue-600"><i class="fas fa-paper-plane"></i></div>
-              <span class="text-[7px] font-black uppercase text-zinc-500">Transfer</span>
-            </button>
-            <button onclick="openWalletAction('qris')" class="flex flex-col items-center gap-2">
-              <div class="w-12 h-12 bg-zinc-900 rounded-2xl flex items-center justify-center shadow-lg text-white"><i class="fas fa-qrcode"></i></div>
-              <span class="text-[7px] font-black uppercase text-zinc-500">Scan QRIS</span>
-            </button>
-            <button onclick="switchPage('history')" class="flex flex-col items-center gap-2">
-              <div class="w-12 h-12 bg-white rounded-2xl flex items-center justify-center shadow-sm text-zinc-400"><i class="fas fa-list-ul"></i></div>
-              <span class="text-[7px] font-black uppercase text-zinc-500">Mutasi</span>
-            </button>
-          </div>
-        </div>
-      </main>
 
-      <nav id="main-nav" class="glass-nav px-6 py-4 flex justify-between items-center z-50 shadow-2xl">
-        <button id="nav-home" onclick="switchPage('home')" class="flex flex-col items-center gap-1 relative text-orange-600">
-          <i class="fas fa-home text-lg"></i>
-          <span class="text-[7px] font-black uppercase tracking-tighter">Beranda</span>
-          <div id="active-order-badge" class="hidden absolute top-0 right-1 w-2 h-2 bg-orange-600 rounded-full border-2 border-white animate-pulse"></div>
-        </button>
-        <button id="nav-promo" onclick="switchPage('promo')" class="flex flex-col items-center gap-1 text-gray-300">
-          <i class="fas fa-percentage text-lg"></i>
-          <span class="text-[7px] font-black uppercase tracking-tighter">Promo</span>
-        </button>
-        <button id="nav-history" onclick="switchPage('history')" class="flex flex-col items-center gap-1 text-gray-300">
-          <i class="fas fa-receipt text-lg"></i>
-          <span class="text-[7px] font-black uppercase tracking-tighter">Riwayat</span>
-        </button>
-        <button id="nav-chat" onclick="switchPage('chat')" class="flex flex-col items-center gap-1 text-gray-300">
-          <i class="fas fa-comment-dots text-lg"></i>
-          <span class="text-[7px] font-black uppercase tracking-tighter">Pesan</span>
-        </button>
-        <button id="nav-profile" onclick="switchPage('profile')" class="flex flex-col items-center gap-1 text-gray-300">
-          <i class="fas fa-crown text-lg"></i>
-          <span class="text-[7px] font-black uppercase tracking-tighter">Sultan</span>
-        </button>
-      </nav>
+            <!-- Page: Profile (Sultan Edition) -->
+            <div id="page-profile" class="page">
+                <div class="text-center pt-4">
+                    <img id="profile-avatar" src="https://i.pravatar.cc/150?u=sultan" class="w-24 h-24 rounded-full mx-auto border-4 border-white shadow-lg">
+                    <h2 id="profile-name" class="text-2xl font-extrabold mt-4 text-zinc-800">Sultan Rama Kirana</h2>
+                    <p id="profile-email" class="text-zinc-500">sultan@cendikiawanstudios.com</p>
+                </div>
+                <div class="mt-8 space-y-4">
+                    <div class="bg-zinc-900 p-6 rounded-[2.5rem]">
+                        <p class="text-sm text-zinc-400">ID Karyawan Sambu Group</p>
+                        <p id="employee-id" class="text-lg font-bold text-white">SBU-12345678</p>
+                    </div>
+                    <div class="bg-zinc-900 p-6 rounded-[2.5rem]">
+                        <div class="flex justify-between items-center">
+                            <div>
+                                <p class="text-sm text-zinc-400">Poin Loyalitas Sultan</p>
+                                <p id="loyalty-points" class="text-2xl font-extrabold text-orange-500">1,250 Poin</p>
+                            </div>
+                            <i class="fas fa-crown text-3xl text-orange-500/50"></i>
+                        </div>
+                    </div>
+                    <div class="bg-white p-4 rounded-[2.5rem] space-y-1">
+                        <a href="#" class="flex items-center gap-4 p-4 rounded-2xl hover:bg-zinc-100 transition-colors"><i class="fas fa-user-edit text-xl text-zinc-400"></i><span class="font-bold text-zinc-800">Edit Profil</span></a>
+                         <a href="#" class="flex items-center gap-4 p-4 rounded-2xl hover:bg-zinc-100 transition-colors"><i class="fas fa-shield-alt text-xl text-zinc-400"></i><span class="font-bold text-zinc-800">Keamanan</span></a>
+                         <a href="#" class="flex items-center gap-4 p-4 rounded-2xl hover:bg-zinc-100 transition-colors"><i class="fas fa-question-circle text-xl text-zinc-400"></i><span class="font-bold text-zinc-800">Pusat Bantuan</span></a>
+                    </div>
+                    <button onclick="App.logout()" class="w-full mt-4 bg-red-600/10 text-red-600 py-4 rounded-2xl font-bold text-lg">Keluar</button>
+                </div>
+            </div>
+
+        </main>
+
+        <!-- Floating Bottom Navigation -->
+        <nav id="bottom-nav" class="fixed bottom-4 left-1/2 -translate-x-1/2 w-[calc(100%-2rem)] max-w-[calc(24rem-2rem)] bg-white/80 backdrop-blur-xl p-4 rounded-3xl shadow-lg flex justify-around items-center z-50">
+             <!-- Nav items injected here -->
+        </nav>
     </div>
 
-    <div id="modal-booking" class="hidden fixed inset-0 bg-black/80 z-[200] flex items-end justify-center backdrop-blur-md">
-      <div class="bg-white w-full max-w-md rounded-t-[4rem] p-8 shadow-2xl animate-slide-up overflow-y-auto max-h-[90dvh] no-scrollbar">
-        <div class="w-12 h-1.5 bg-gray-200 rounded-full mx-auto mb-8"></div>
-        <h3 id="booking-title" class="text-xl font-black italic text-zinc-900 uppercase mb-6 text-center">Formulir Sultan</h3>
-        <div id="transport-fields" class="space-y-4 mb-8">
-          <div class="relative">
-            <i class="fas fa-circle-dot absolute left-5 top-1/2 -translate-y-1/2 text-orange-500 text-[10px]"></i>
-            <input id="input-origin" type="text" placeholder="Titik Jemput" class="w-full bg-gray-50 rounded-2xl py-4 pl-12 pr-6 text-xs font-bold outline-none border-2 border-transparent focus:border-orange-500 transition-all" />
-          </div>
-          <div class="relative">
-            <i class="fas fa-location-arrow absolute left-5 top-1/2 -translate-y-1/2 text-blue-500 text-[10px]"></i>
-            <input id="input-destination" type="text" placeholder="Titik Tujuan" class="w-full bg-gray-50 rounded-2xl py-4 pl-12 pr-6 text-xs font-bold outline-none border-2 border-transparent focus:border-blue-500 transition-all" />
-          </div>
-        </div>
-        <div id="booking-options" class="space-y-4 mb-8"></div>
-        <div class="flex gap-3">
-          <button onclick="closeBooking()" class="flex-1 py-5 bg-gray-100 text-gray-400 rounded-3xl font-black uppercase text-[10px]">Batal</button>
-          <button id="btn-submit-order" class="flex-[2] py-5 bg-orange-600 text-white rounded-3xl font-black uppercase italic shadow-lg shadow-orange-600/20 text-[10px] active:scale-95 transition-all">Lanjut</button>
-        </div>
-      </div>
-    </div>
-
-    <script src="auth.js"></script>
-    <script src="services.js"></script>
-    <script src="ui-engine.js"></script>
-    <script src="role-engine.js"></script>
-    <script src="logic.js"></script>
-    <script src="app.js"></script>
-
-    <script>
-      window.onload = async () => {
-        // 1. Validasi Login
-        if (localStorage.getItem("isLoggedIn") !== "true") {
-          window.location.href = "login.html";
-          return;
-        }
-        
-        // 2. Load Data & Render Multi-Role Dashboard
-        try {
-          const res = await fetch("/api/data");
-          const data = await res.json();
-          RoleEngine.updateUI(data);
-        } catch (err) {
-          console.error("Gagal sinkronisasi data:", err);
-        }
-
-        // 3. Inisialisasi App Core
-        const isDriver = window.location.port === "4000";
-        if (typeof AppRenderer !== "undefined") AppRenderer.init(isDriver);
-        
-        syncAll();
-        setInterval(syncAll, 2000);
-        switchPage("home");
-
-        // 4. Inisialisasi Pull to Refresh
-        if (typeof dieHantarRefresh !== "undefined") {
-          dieHantarRefresh.init(
-            "main-scroll-container",
-            async () => { await syncAll(); },
-            isDriver ? "#2563eb" : "#ea580c"
-          );
-        }
-      };
-    </script>
-  </body>
+    <!-- Firebase & App Logic -->
+    <script type="module" src="firebase.js"></script>
+    <script type="module" src="app.js"></script>
+</body>
 </html>
