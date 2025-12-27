@@ -4,18 +4,15 @@ import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.1/firebase
 import { getAuth } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-auth.js";
 import { getFirestore } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore.js";
 
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
-
 // Your web app's Firebase configuration
-// !! IMPORTANT: REPLACE WITH YOUR ACTUAL FIREBASE CONFIG FROM THE FIREBASE CONSOLE !!
 const firebaseConfig = {
-  apiKey: "PASTE_YOUR_API_KEY_HERE",
-  authDomain: "PASTE_YOUR_AUTH_DOMAIN_HERE",
-  projectId: "PASTE_YOUR_PROJECT_ID_HERE",
-  storageBucket: "PASTE_YOUR_STORAGE_BUCKET_HERE",
-  messagingSenderId: "PASTE_YOUR_MESSAGING_SENDER_ID_HERE",
-  appId: "PASTE_YOUR_APP_ID_HERE"
+  apiKey: "AIzaSyDjPmukz7E5mKLP8_BVN7cMxErnQMmKqdU",
+  authDomain: "diehantarmobile-f499b.firebaseapp.com",
+  projectId: "diehantarmobile-f499b",
+  storageBucket: "diehantarmobile-f499b.appspot.com",
+  messagingSenderId: "699024660110",
+  appId: "1:699024660110:web:d7c27a9d2cc003f8c79bdf",
+  measurementId: "G-6737TJ61P0"
 };
 
 // Initialize Firebase
