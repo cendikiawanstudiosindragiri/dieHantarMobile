@@ -1,26 +1,41 @@
 {
-  "name": "out",
-  "version": "0.1.0",
+  "name": "diehantar-next-app",
+  "version": "9.0.0",
   "private": true,
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "next lint"
   },
   "dependencies": {
-    "next": "16.0.8",
-    "react": "19.2.1",
-    "react-dom": "19.2.1"
+    "@tailwindcss/postcss": "^4.1.18",
+    "cors": "^2.8.5",
+    "express": "^4.18.2",
+    "firebase": "^10.12.3",
+    "framer-motion": "^12.23.26",
+    "geist": "^1.5.1",
+    "lucide-react": "^0.562.0",
+    "next": "latest",
+    "react": "^18",
+    "react-dom": "^18",
+    "react-firebase-hooks": "^5.1.1",
+    "react-icons": "^5.5.0"
   },
   "devDependencies": {
-    "@tailwindcss/postcss": "^4",
+    "@eslint/js": "^9.39.2",
     "@types/node": "^20",
-    "@types/react": "^19",
-    "@types/react-dom": "^19",
-    "eslint": "^9",
-    "eslint-config-next": "16.0.8",
-    "tailwindcss": "^4",
-    "typescript": "^5"
+    "@types/react": "^18",
+    "@types/react-dom": "^18",
+    "autoprefixer": "^10.4.23",
+    "eslint": "^9.39.2",
+    "eslint-config-next": "latest",
+    "eslint-config-xo": "^0.49.0",
+    "eslint-plugin-react": "^7.37.5",
+    "globals": "^16.5.0",
+    "postcss": "^8.5.6",
+    "tailwindcss": "^3.4.19",
+    "typescript": "^5",
+    "typescript-eslint": "^8.51.0"
   }
 }
